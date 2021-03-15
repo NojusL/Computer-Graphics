@@ -1,0 +1,142 @@
+<html>
+<body>
+  <div style="text-align: center;">
+    <div>
+      <button onclick="animationcall1();">Animacija 1</button>
+      <button onclick="animationcall2();">Animacija 2</button>
+      <button onclick="animationcall3();">Animacija 3</button>
+      <button onclick="animationcall4();">Animacija 4</button>
+    </div>
+    <div style="margin: 5px; ">
+      <canvas id="canvas" width="600" height="600" />
+    </div>
+  </div>
+    <script>
+  var canvas;
+  var ctx;
+  var t = 0.0;
+  var d = 0.05;
+
+  function init() {
+    canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      ctx = canvas.getContext('2d');
+      drawShape();
+    }
+  }
+
+  function animationcall1() {
+    t = 0.0;
+    setInterval(function() {
+      if (t < 0.9999) {
+        t = t + d;
+        drawBorder();
+        transformF1(t);
+      }
+    }, 200);
+  }
+
+  function animationcall2() {
+    t = 0.0;
+    setInterval(function() {
+      if (t < 0.9999) {
+        t = t + d;
+        drawBorder();
+        transformF2(t);
+      }
+    }, 200);
+  }
+
+  function animationcall3() {
+    t = 0.0;
+    setInterval(function() {
+      if (t < 0.9999) {
+        t = t + d;
+        drawBorder();
+        transformF3(t);
+      }
+    }, 200);
+  }
+
+  function animationcall4() {
+    setInterval(function() {
+      if (t < 0.9999) {
+        t = t + d;
+        drawBorder();
+        transformF4(t);
+      }
+    }, 200);
+  }
+
+  function transformF1(t) {
+    ctx.save();
+    var l1 = 1 - 0.75 * t;
+    var l2 = 1 - 1.25 * t;
+    var alpha = -Math.PI / 2 * t;
+    ctx.transform(l1 * Math.cos(alpha), l1 * (-Math.sin(alpha)), l2 * Math.sin(alpha), l2 * Math.cos(alpha), 450 * t, 150 * t);
+    ctx.fillStyle = "red";
+    drawShape();
+    ctx.restore();
+  }
+
+  function transformF2(t) {
+    ctx.save();
+    var l1 = 1 - 0.5 * t;
+    var l2 = 1 - 1.5 * t;
+    ctx.transform(l1, 0, 0, l1, 0, 300 * t);
+    ctx.fillStyle = "green";
+    drawShape();
+    ctx.restore();
+  }
+
+  function transformF3(t) {
+    ctx.save();
+    var l1 = 1 - 0.5 * t;
+    var l2 = 1 - 1.5 * t;
+    ctx.transform(0, l1, l2, 0, 600 * t, 300 * t);
+    ctx.fillStyle = "blue";
+    drawShape();
+    ctx.restore();
+  }
+
+  function transformF4(t) {
+    ctx.save()
+    var l1 = 1 - 0.5 * t;
+    var l2 = 1 - 1.5 * t;
+    ctx.transform(l1, 0, 0, l2, 0, 300 * t);
+    ctx.fillStyle = "orange";
+    drawShape();
+    ctx.restore();
+  }
+
+  function drawBorder() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(600, 0);
+    ctx.lineTo(600, 600);
+    ctx.lineTo(0, 600);
+    ctx.closePath();
+    ctx.fillStyle = '#FDFDFD';
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawShape() {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, 600);
+    ctx.lineTo(600, 600);
+    ctx.lineTo(600, 150);
+    ctx.lineTo(350, 150);
+    ctx.lineTo(350, 250);
+    ctx.lineTo(250, 250);
+    ctx.lineTo(250, 0);
+    ctx.closePath();
+    ctx.fill();
+  }
+  init();
+</script>
+</body>
+
+</html>
